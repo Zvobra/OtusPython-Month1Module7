@@ -445,28 +445,25 @@ def select_contact(state: AppState, visible_contacts: list[Contact]) -> bool:
             return True
 
         while True:
-            try:
-                if not process_actions([
-                    {
-                        "title": "Редактировать \"Имя\"",
-                        "action": edit_contact_name,
-                    },
-                    {
-                        "title": "Редактировать \"Телефон\"",
-                        "action": edit_contact_phone,
-                    },
-                    {
-                        "title": "Редактировать \"Комментарий\"",
-                        "action": edit_contact_comment,
-                    },
-                    {
-                        "title": "Назад",
-                        "action": lambda: False
-                    },
-                ]):
-                    break
-            except AppError as err:
-                print_error(f"Ошибка редактирования: {str(err)}")
+            if not process_actions([
+                {
+                    "title": "Редактировать \"Имя\"",
+                    "action": edit_contact_name,
+                },
+                {
+                    "title": "Редактировать \"Телефон\"",
+                    "action": edit_contact_phone,
+                },
+                {
+                    "title": "Редактировать \"Комментарий\"",
+                    "action": edit_contact_comment,
+                },
+                {
+                    "title": "Назад",
+                    "action": lambda: False
+                },
+            ]):
+                break
 
         if old_contact != contact:
             state["has_changes"] = True
